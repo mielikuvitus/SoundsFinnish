@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="header">
+    <p class="header-header no-padding" id="zilla">welcome</p>
+    <p class="header-subheader extra-padding">create an account</p>
+</div>
+
+<div class="content">
+    <div class="box">
+        <form action="/signup" method="post">
+            <div class="form-field">
+                <label for="username" class="form-label">username</label>
+                <input type="text" name="name" id="username" class="form-input" placeholder="theunknownverbalist" required>
+            </div>
+            <div class="form-field">
+                <label for="password" class="form-label">password</label>
+                <input type="password" name="password_hash" id="password" class="form-input" placeholder="youcanthackthispw" required minlength="8">
+            </div>
+            <div class="form-field">
+                <input type="submit" class="form-submit" value="sign up">
+            </div>
+            <div class="register">
+                <label for="register" class="register-label">Already a member?</label>
+                <a href="/">
+                    <label for="register" class="register-label-btn">Log in</label>
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
