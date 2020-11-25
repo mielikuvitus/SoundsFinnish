@@ -2,7 +2,10 @@ from flask import Flask, render_template, request, session, redirect, url_for
 from werkzeug.security import generate_password_hash, check_password_hash
 from models.user import User
 from models.user_activity import UserActivity
+from models.lesson import Lesson
+from models.word import Word
 import sqlite3
+import short_url
 
 app = Flask(__name__)
 app.secret_key = 'suv'
@@ -54,6 +57,11 @@ def login_user():
         return render_template('login.html', error = error)
     
     return render_template('home.html', name = session['name'])
+
+""" @app.route("/<string:lesson_id>/<string:word_id")
+def lesson_words(lesson_id):
+    lesson = Lesson.get_by_lesson_id()
+    words = Word.find_by_lesson_id() """
 
 @app.errorhandler(404)
 def not_found():
