@@ -201,7 +201,7 @@ def setup():
     #add audio data for lesson2
 
     #audio_id, word_id, content_url
-    audio_files = [
+    """     audio_files = [
         dict(word_id='139982c8-6d5e-432a-bc43-6172ae8662f3', content_url='/static/audio/mikäsunnimion-toni.mp3'),
         dict(word_id='ca22da25-4fb1-48a8-a2c0-72b792d2ad2a', content_url='/static/audio/mäoon-toni.mp3'),
         dict(word_id='f59eef12-89ff-464f-8b8a-54b903c55740', content_url='/static/audio/puhuksäenglantii.mp3'), #suvi -file
@@ -225,14 +225,22 @@ def setup():
     ]
     for audio in audio_files:
         cursor.execute("INSERT INTO audio VALUES (?,?,?)", (str(uuid.uuid4()), audio["word_id"], audio["content_url"],))
+    """
+
+    #add video data
+
+    video_id = str(uuid.uuid4())
+    cursor.execute("INSERT INTO video VALUES (?, '1a127cf9-354a-4262-8183-8c52f4d1dcac', '/static/video/moi-nelly.mov')", (video_id,))
+
+    """     video_files = [
+        dict(word_id='1a127cf9-354a-4262-8183-8c52f4d1dcac', content_url='/static/video/moi-nelly.mov')
 
 
-    #add video test data
+    ]
+    for video in video_files:
+        cursor.execute("INSERT INTO video VALUES (?,?,?)", (str(uuid.uuid4()), video["word_id"], video["content_url"],))
 
-    """ cursor.execute("INSERT INTO video VALUES ('50aa', '10aa', 'https://www.pexels.com/video/hitchhiking-astronaut-holding-a-sign-5274494/')")
-    cursor.execute("INSERT INTO video VALUES ('50ab', '10ab', 'https://www.pexels.com/video/a-beer-in-drinking-glass-sliding-on-bar-counter-5530294/')") """
-
-
+    """
 
     connection.commit()
 

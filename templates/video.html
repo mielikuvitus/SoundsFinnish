@@ -1,0 +1,17 @@
+{% extends "lesson.html" %}
+{% block video %}
+{% set moi = true %}
+    {% if moi %}
+    <div class="video">
+        <video controls poster="">
+            <source src="/static/video/moi-nelly-1.m4v" type="video/mp4">
+           
+            <!-- fallback for browsers that don't support mp4 <source src="videofile.webm" type="video/webm"> -->
+           
+        </video>
+    </div>
+        {{ super() }}
+    {% else %}
+        {{ super() }}
+    {% endif %}
+{% endblock %}

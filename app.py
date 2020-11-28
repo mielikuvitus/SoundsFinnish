@@ -70,6 +70,7 @@ def login_user():
 def lesson_words(lesson_id, word_id = None):
     lesson = Lesson.get_by_lesson_id(lesson_id)
     words = Word.find_by_lesson_id(lesson_id)
+    moi = True
 
     word_index = 0
     for i, word in enumerate(words):
@@ -84,7 +85,7 @@ def lesson_words(lesson_id, word_id = None):
     if word_index < len(words) - 1:
         next_word = words[word_index + 1]
 
-    return render_template("lesson.html", lesson_id=lesson_id, audio_url=audio_url, word=word, next_word=next_word)
+    return render_template("video.html", lesson_id=lesson_id, moi=moi, audio_url=audio_url, word=word, next_word=next_word)
 
 @app.errorhandler(404)
 def not_found():

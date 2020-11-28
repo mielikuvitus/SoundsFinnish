@@ -74,12 +74,23 @@ body {
     background-color:#4F60FF;
 }
 
+video {
+    height: 40vh;
+    outline: unset;
+}
+
+.video {
+    flex: 1;
+    padding-top: 3vh;
+}
+
 .flex{
     display: flex;
     flex-direction: column;
 }
 
 .header {
+    padding-top: 3vh;
     flex:1;
     display: flex;
     flex-direction: column;
