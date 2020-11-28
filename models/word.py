@@ -3,6 +3,7 @@ __author__='suvihelin'
 import uuid
 import sqlite3
 import sqlite
+from urllib.parse import unquote
 
 class Word(object):
 
@@ -25,14 +26,7 @@ class Word(object):
         sqlite.close_connection(connection)
 
         if result is not None:
-            for row in result:
-                print("id: ", row[0])
-                print("lesson_id: ", row[1])
-                print("name: ", row[2])
-                print("desctiption: ", row[3])
-                print("translation: ", row[4])
-                print("\n")   
-                return [cls(**word) for word in result]
+            return [cls(row[1], row[2], row[3], row[4], row[0]) for row in result]
         else:
             print("The lesson_id does not exist")
             return None

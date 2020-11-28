@@ -67,19 +67,34 @@ body {
 }
 
 .container {
-    padding-left: 3vw;
+    padding-left: 8vw;
     width: 90vw;
     display: flex;
     flex-direction: column;
     background-color:#4F60FF;
 }
 
+.flex{
+    display: flex;
+    flex-direction: column;
+}
+
 .header {
-    padding-left: 4vw;
     flex:1;
     display: flex;
     flex-direction: column;
+}
+
+.flex-end {
     justify-content: flex-end;
+}
+
+.centre {
+    justify-content: center;
+}
+
+.padding-right {
+    padding-right: 8vw;
 }
 
 .header p {
@@ -96,12 +111,91 @@ body {
     color: #EBEFFF;
 }
 
+.word {
+    display:flex;
+}
+
+#playbutton {
+    background-color: unset;
+    color: #EBEFFF;
+    cursor: pointer;
+    text-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    text-align: unset;
+    padding: unset;
+    border: unset;
+    outline: unset;
+}
+
+#size-up {
+    padding-top: 5px;
+    font-size: 4em;
+}
+
+#playbutton:hover {
+    color: #00E894;
+    text-shadow: 0px 5px 10px rgba(46, 229, 157, 0.4);
+}
+
+figure {
+    padding-left: 2vw;
+    padding-top: 1vh;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+}
+
+.text{
+    display: block;
+}
+
+.text-translation{
+    color: #EBEFFF;
+    font-weight: 700;
+    font-size: x-large;
+
+}
+
+.text-description{
+    color: #EBEFFF;
+    font-weight: 300;
+    max-width: 50vw;
+}
+
+.btn-box {
+    flex:0.8;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.next-btn {
+    font-family: 'Raleway', sans-serif;
+    background-color: #EBEFFF;
+    width: fit-content;
+    height: fit-content;
+    font-size: large;
+    padding: 10px 15px 10px 15px;
+    border-radius: 10px;
+    border: none;
+    font-weight: 600;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease 0s;
+    cursor: pointer;
+}
+
+.next-btn a {
+    color: #2D42FF;
+}
+
 .content {
     flex:1;
     display: flex;
 }
 
 .box {
+    flex: 1;
     padding-left: 1vw;
     margin-right: 3vw;
     border-radius: 10px;
@@ -120,8 +214,15 @@ body {
 
 .box-content i {
     padding-right: 1vw;
-    font-size: 200px;
+    font-size: 10em;
     color: #EBEFFF;
+    text-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+}
+
+.box-content i:hover {
+    color: #00E894;
+    text-shadow: 0px 5px 10px rgba(46, 229, 157, 0.4);
 }
 
 .box-header {
@@ -201,6 +302,7 @@ input:invalid {
 a {
     text-decoration: none;
 }
+
 .register-label-btn:hover {
     color: #00E894;
     text-decoration: underline;

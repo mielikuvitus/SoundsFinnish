@@ -24,7 +24,7 @@ class Lesson(object):
         sqlite.close_connection(connection)
 
         if result is not None:    
-            return cls(result[0], result[1], result[2])
+            return cls(result[1], result[2], result[0])
         else:
             print("The lesson_id does not exist")
             return None

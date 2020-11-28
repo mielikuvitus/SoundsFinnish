@@ -1,29 +1,39 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="header">
-    <p class="header-header extra-padding" id="zilla">moi</p>
-    <p class="header-subheader no-padding">translation</p>
-    <p class="header-subheader no-padding">hello</p>
+{% block video %}
+
+{% endblock %}
+<div class="header flex-end padding-right">
+    <div class="word">
+        <p class="header-header" id="zilla">{{word.name}}</p>
+        <figure>
+            <button id="playbutton">
+                <i class="material-icons" id="size-up">volume_up</i>
+            </button>
+            <audio id="audio"
+                src="{{audio_url}}">
+                    Your browser does not support the
+                    <code>audio</code> element.
+            </audio>
+        </figure>
+    </div>
+    <div class="text">
+        <p class="header-subheader no-padding">translation:</p>
+        <p class="text-translation">{{word.translation}}</p>
+        <p class="header-subheader no-padding">description:</p>
+        <p class="text-description">{{word.description}}</p>
+    </div> 
+</div>
+<div class="btn-box padding-right">
+    {% if next_word %}
+        <div id="next-btn" class="next-btn" onclick="setClass()">
+            <a href="/{{lesson_id}}/{{next_word.word_id}}">Next Word</a>
+        </div>
+    {% else %}
+        <div id="next-btn" class="next-btn" onclick="setClass()">
+            <a href="/">Back to home</a>
+        </div>
+    {% endif %}
 </div>
 
-<div class="content">
-    <div class="box">
-        <div class="box-content">
-            <i class="material-icons">play_circle_outline</i>
-            <div class="box-content-inner">
-                <p class="box-header" name="name" id="zilla">lesson 1 - Hi, I am..</p>
-                <p class="box-description" name="description">description</p>
-            </div>  
-        </div>
-    </div>
-    <div class="box">
-        <div class="box-content">
-            <i class="material-icons">play_circle_outline</i>
-            <div class="box-content-inner">
-                <p class="box-header" name="name" id="zilla">lesson 1 - Hi, I am..</p>
-                <p class="box-description" name="description">description</p>
-            </div> 
-        </div>
-    </div>
-</div>
 {% endblock %}
