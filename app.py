@@ -56,28 +56,39 @@ def login_user():
     lesson2 = Lesson.get_by_lesson_id('618af7ad-3d63-4609-a7f1-50704106b9e4')
 
     if User.login_valid(name, password):
-        User.login(name)
+        return render_template('home.html', name = session['name'], lesson1 = lesson1, lesson2 = lesson2)
     else:
         error = 'Invalid credentials'
         session['name'] = None
         return render_template('login.html', error = error)
-    
-    return render_template('home.html', name = session['name'], lesson1 = lesson1, lesson2 = lesson2)
 
 @app.route("/<string:lesson_id>/<string:word_id>")
 @app.route("/<string:lesson_id>")
 @app.route("/lesson")
 def lesson_words(lesson_id, word_id = None):
-    lesson = Lesson.get_by_lesson_id(lesson_id)
     words = Word.find_by_lesson_id(lesson_id)
-    moi = True
+
+    if word_id is None:
+        word_id = UserActivity.get_latest_word_id(session['user_id'])
+        if word_id == words[-1].word_id:
+            word_id = words[0]
 
     word_index = 0
     for i, word in enumerate(words):
         if word.word_id == word_id:
             word_index = i
+            break
             
     word = words[word_index]
+    show_video = False
+
+    user_activity = UserActivity(word.word_id, session['user_id'])
+    if user_activity.is_duplicate() is False:
+        user_activity.save_to_db()
+    else:
+        user_activity.update_timestamp()
+        show_video = True
+    
     audio = Audio.find_by_word(word.word_id)
     audio_url = audio[0].content_url
 
@@ -85,7 +96,7 @@ def lesson_words(lesson_id, word_id = None):
     if word_index < len(words) - 1:
         next_word = words[word_index + 1]
 
-    return render_template("video.html", lesson_id=lesson_id, moi=moi, audio_url=audio_url, word=word, next_word=next_word)
+    return render_template("video.html", lesson_id=lesson_id, show_video=show_video, audio_url=audio_url, word=word, next_word=next_word)
 
 @app.errorhandler(404)
 def not_found():

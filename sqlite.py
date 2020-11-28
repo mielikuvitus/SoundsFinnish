@@ -230,9 +230,9 @@ def setup():
     #add video data
 
     video_id = str(uuid.uuid4())
-    cursor.execute("INSERT INTO video VALUES (?, '1a127cf9-354a-4262-8183-8c52f4d1dcac', '/static/video/moi-nelly.mov')", (video_id,))
+    cursor.execute("INSERT INTO video VALUES (?, '1a127cf9-354a-4262-8183-8c52f4d1dcac', '/static/video/moi-nelly-1.m4v')", (video_id,))
 
-    """     video_files = [
+    """    video_files = [
         dict(word_id='1a127cf9-354a-4262-8183-8c52f4d1dcac', content_url='/static/video/moi-nelly.mov')
 
 
@@ -241,7 +241,6 @@ def setup():
         cursor.execute("INSERT INTO video VALUES (?,?,?)", (str(uuid.uuid4()), video["word_id"], video["content_url"],))
 
     """
-
     connection.commit()
 
     connection.close()

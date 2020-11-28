@@ -1,7 +1,6 @@
 {% extends "lesson.html" %}
 {% block video %}
-{% set moi = true %}
-    {% if moi %}
+    {% if show_video %}
     <div class="video">
         <video controls poster="">
             <source src="/static/video/moi-nelly-1.m4v" type="video/mp4">

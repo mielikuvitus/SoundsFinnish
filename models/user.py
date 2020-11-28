@@ -82,16 +82,14 @@ class User(object):
     def login_valid(name, password):
         #Check if username matches with their password
         user = User.get_by_username(name)
-        print(user.name)
         if user is not None:
             #Check password using check_password_method that only compares passwords and doesn't salt them
-            return check_password_hash(user.password_hash, password)
-        return False
+            if check_password_hash(user.password_hash, password) is True:
+                session['name'] = user.name
+                session['user_id'] = user.user_id
+                return True
 
-    @staticmethod
-    def login(name):
-        #login_valid has already been called
-        session['name'] = name
+        return False
     
     @staticmethod
     def logout():
