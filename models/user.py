@@ -88,6 +88,8 @@ class User(object):
             if check_password_hash(user.password_hash, password) is True:
                 session['name'] = user.name
                 session['user_id'] = user.user_id
+                session['url'] = 1
+                session['score'] = 0
                 return True
 
         return False
@@ -96,5 +98,7 @@ class User(object):
     def logout():
         session['name'] = None
         session['user_id'] = None
+        session['url'] = None
+        session['score'] = None
 
 

@@ -31,3 +31,20 @@ class Word(object):
             print("The lesson_id does not exist")
             return None
 
+    @classmethod
+    def get_words(cls):
+        #define connection and cursor
+        connection = sqlite.get_connection()
+        cursor = connection.cursor()
+
+        #get all words
+        cursor.execute('SELECT * FROM word')
+        result = cursor.fetchall()
+        sqlite.close_connection(connection)
+
+        if result is not None:
+            return [cls(row[1], row[2], row[3], row[4], row[0]) for row in result]
+        else:
+            print("No words were found")
+            return None
+

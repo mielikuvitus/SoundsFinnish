@@ -23,7 +23,6 @@ class Audio(object):
         sqlite.close_connection(connection)
 
         if result is not None:
-            #add randomiser
             return [cls(row[1], row[2], row[0]) for row in result]
         else:
             print("The word_id does not exist")

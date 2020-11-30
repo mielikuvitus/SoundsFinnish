@@ -13,23 +13,55 @@
         </audio>
     </figure>
 </div>
+
+<script>
+    {% if page == 1 %}
+        window.addEventListener("load", function(){
+            sessionStorage.setItem("correctAnswers", "0")
+        });
+    {% endif %}
+
+    function markCorrectAnswer() {
+        var currentNumber = parseInt(sessionStorage.getItem("correctAnswers"));
+        sessionStorage.setItem("correctAnswers", (currentNumber + 1).toString());
+
+        fetch("/submit_answer", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({result: currentNumber + 1})
+        }).then(res => {
+            window.location = res.url;
+        });
+    }
+
+    function nextPage() {
+        var currentNumber = parseInt(sessionStorage.getItem("correctAnswers"));
+
+        fetch("/submit_answer", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({result: currentNumber + 1})
+        }).then(res => {
+            window.location = res.url;
+        });
+    }
+
+    
+</script>
+
 <div class="flex">
     <div class="test-btn-box">
-        <div id="test-btn" class="test-btn" onclick="">Mitä kuuluu?</div>
-        <div id="test-btn" class="test-btn" onclick="">Mikä sun nimi on?</div>
-        <div id="test-btn" class="test-btn" onclick="">Voikko jättää mut rauhaan?</div>
+        {% for item in test_choices %}
+            <div id="test-btn" class="test-btn" onclick="{% if item == test_answer %}markCorrectAnswer(){% else %}nextPage(){% endif %}">{{item}}</div>
+        {% endfor %}
     </div>
 </div>
 <div class="btn-box padding-right">
-    {% if next_word %}
-        <div id="next-btn" class="next-btn" onclick="">
-            <a href="/{{lesson_id}}/{{next_word.word_id}}">Next</a>
-        </div>
-    {% else %}
-        <div id="next-btn" class="next-btn" onclick="">
-            <a href="/">Back to home</a>
-        </div>
-    {% endif %}
+    <p></p>
 </div>
 
 {% endblock %}

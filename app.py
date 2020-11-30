@@ -5,8 +5,9 @@ from models.user_activity import UserActivity
 from models.lesson import Lesson
 from models.word import Word
 from models.audio import Audio
+from models.test_yourself import TestYourself
 import sqlite3
-import short_url
+import random
 
 app = Flask(__name__)
 app.secret_key = 'suv'
@@ -108,8 +109,62 @@ def latest_lesson_position():
     return redirect("/{0}/{1}".format(latest_position[1], latest_position[0]))
 
 @app.route("/test_yourself")
-def test():
-    return render_template("test.html")
+@app.route("/test_yourself/<int:page>")
+def test(word_id = None, page = 1):
+    
+    total = 11
+
+    if session['url'] >= total:
+        session['url'] = 1
+        return redirect('/result')
+    
+    word_list = Word.get_words()
+    user_words = UserActivity.user_words(session['user_id'])
+    if len(user_words) < 10:
+        return redirect("/message")
+
+    test_choices = []
+
+    # Get the answer
+    question_randomiser = random.randint(0, len(user_words)-1)
+    print(user_words[question_randomiser])
+    test_question_id = user_words[question_randomiser][4]
+    test_answer = user_words[question_randomiser][6]
+    audio = Audio.find_by_word(test_question_id)
+    audio_url = audio[0].content_url
+
+    test_choices.append(test_answer)
+
+    # Get the other options
+    test_choice1 = random.randint(0, len(word_list)-1)
+    test_choice2 = random.randint(0, len(word_list)-1)
+    while word_list[test_choice1].name == word_list[test_choice2].name or word_list[test_choice1].name == user_words[question_randomiser][6] or word_list[test_choice2].name == user_words[question_randomiser][6]:
+        test_choice1 = random.randint(0, len(word_list)-1)
+        test_choice2 = random.randint(0, len(word_list)-1)
+
+    test_choices.append(word_list[test_choice1].name)
+    test_choices.append(word_list[test_choice2].name)
+    random.shuffle(test_choices)
+
+    return render_template("test.html", page=page, url=session['url'], next_word=page < total, test_answer=test_answer, test_choices=test_choices, total=total, audio_url=audio_url)
+
+@app.route('/submit_answer', methods=["POST"])
+def submit_answer():
+    session["correct_answers"] = request.json["result"]
+    if session['url'] <= 11:
+        session['url'] = session['url'] + 1
+        return redirect("/test_yourself/{0}".format(session['url']))
+    else:
+        return redirect("/result")
+
+@app.route("/result")
+def result():
+    message = TestYourself.get_final_score_message(session["correct_answers"])
+    return render_template("result.html", message=message)
+
+@app.route("/message")
+def show_message():
+    return render_template("message.html")
 
 @app.errorhandler(404)
 def not_found():

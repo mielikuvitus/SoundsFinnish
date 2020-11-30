@@ -47,7 +47,7 @@ class UserActivity(object):
         connection = sqlite.get_connection()
         cursor = connection.cursor()
 
-        #get by 
+        #get by user_id
         cursor.execute('SELECT * FROM user_activity WHERE user_id =? ORDER BY "timestamp" DESC LIMIT 1', (user_id,))
         result = cursor.fetchone()
         sqlite.close_connection(connection)
@@ -75,3 +75,19 @@ class UserActivity(object):
         if result is not None:
             return result[2], result[5]
         return None
+
+    def user_words(user_id):
+        #define connection and cursor
+        connection = sqlite.get_connection()
+        cursor = connection.cursor()
+
+        #get by user_id
+        cursor.execute('SELECT * FROM user_activity u JOIN word w ON w.word_id = u.word_id WHERE user_id =? ORDER BY "timestamp" DESC', (user_id,))
+        result = cursor.fetchall()
+        print(result)
+        sqlite.close_connection(connection)
+        if result is not None:
+            return [row for row in result]
+        else:
+            print("No words were found")
+            return None

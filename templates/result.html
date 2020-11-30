@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="header flex-end">
+    <p class="header-subheader no-padding">Your results are:</p>
+    <p class="header-header extra-padding" id="zilla">{{message}}</p>
+</div>
+<div class="btn-box-test padding-right">
+    <div id="next-btn" class="next-btn">
+        <a href="/test_yourself">Try again!</a>
+    </div>
+    <div id="next-btn" class="next-btn">
+        <a href="/">Back to home</a>
+    </div>
+</div>
+{% endblock %}
