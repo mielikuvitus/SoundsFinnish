@@ -24,11 +24,11 @@
 </div>
 <div class="btn-box padding-right">
     {% if next_word %}
-        <div id="next-btn" class="next-btn" onclick="setClass()">
+        <div id="next-btn" class="next-btn" onclick="">
             <a href="/{{lesson_id}}/{{next_word.word_id}}">Next Word</a>
         </div>
     {% else %}
-        <div id="next-btn" class="next-btn" onclick="setClass()">
+        <div id="next-btn" class="next-btn" onclick="">
             <a href="/">Back to home</a>
         </div>
     {% endif %}

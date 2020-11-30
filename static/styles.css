@@ -19,6 +19,9 @@ body {
 .no-padding {
     margin-block-end: 0;
 }
+.no-padding-left {
+    padding-left: unset;
+}
 
 .extra-padding {
     margin-block-end: 10vh;
@@ -143,9 +146,13 @@ video {
     font-size: 4em;
 }
 
+#size-up-up {
+    padding-top: 5px;
+    font-size: 6em;
+}
+
 #playbutton:hover {
     color: #00E894;
-    text-shadow: 0px 5px 10px rgba(46, 229, 157, 0.4);
 }
 
 figure {
@@ -171,6 +178,7 @@ figure {
 .text-description{
     color: #EBEFFF;
     font-weight: 300;
+    font-size: large;
     max-width: 50vw;
 }
 
@@ -198,6 +206,32 @@ figure {
 
 .next-btn a {
     color: #2D42FF;
+}
+
+.test-btn-box{
+
+}
+
+.test-btn {
+    margin: 40px 0px 40px 0px;
+    font-family: 'Raleway', sans-serif;
+    background-color: #EBEFFF;
+    width: fit-content;
+    font-size: xx-large;
+    padding: 15px 50px 15px 50px;
+    border-radius: 10px;
+    border: none;
+    font-weight: 600;
+    color: #2D42FF;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease 0s;
+    cursor: pointer;
+}
+
+.test-btn:hover {
+    background-color: #0017E9;
+    color: #EBEFFF;
+    box-shadow: 0px 5px 10px rgba(0, 23, 233, 0.4);
 }
 
 .content {
@@ -287,6 +321,7 @@ input:invalid {
     font-weight: 600;
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease 0s;
+    outline: unset;
 }
 
 .form-submit:hover{

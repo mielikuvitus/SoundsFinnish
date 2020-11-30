@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="header centre">
+    <p class="header-subheader no-padding">Choose the word you are hearing</p>
+    <figure class= "no-padding-left">
+        <button id="playbutton">
+            <i class="material-icons" id="size-up-up">volume_up</i>
+        </button>
+        <audio id="audio"
+            src="{{audio_url}}">
+                Your browser does not support the
+                <code>audio</code> element.
+        </audio>
+    </figure>
+</div>
+<div class="flex">
+    <div class="test-btn-box">
+        <div id="test-btn" class="test-btn" onclick="">Mitä kuuluu?</div>
+        <div id="test-btn" class="test-btn" onclick="">Mikä sun nimi on?</div>
+        <div id="test-btn" class="test-btn" onclick="">Voikko jättää mut rauhaan?</div>
+    </div>
+</div>
+<div class="btn-box padding-right">
+    {% if next_word %}
+        <div id="next-btn" class="next-btn" onclick="">
+            <a href="/{{lesson_id}}/{{next_word.word_id}}">Next</a>
+        </div>
+    {% else %}
+        <div id="next-btn" class="next-btn" onclick="">
+            <a href="/">Back to home</a>
+        </div>
+    {% endif %}
+</div>
+
+{% endblock %}

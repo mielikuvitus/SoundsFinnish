@@ -38,6 +38,7 @@ class User(object):
                 #add user data
                 cursor.execute('INSERT INTO user (user_id, name, password_hash) VALUES (?, ?, ?)', (self.user_id, self.name, self.password_hash))
                 session['name'] = self.name
+                session['user_id'] = self.user_id
             except:
                 # cursor.execute('CREATE TABLE user (user_id text PRIMARY KEY, name text, password_hash text)')
                 raise UserNotFoundError('The table `user` does not exist')
@@ -94,5 +95,6 @@ class User(object):
     @staticmethod
     def logout():
         session['name'] = None
+        session['user_id'] = None
 
 

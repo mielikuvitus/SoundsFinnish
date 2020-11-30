@@ -27,6 +27,9 @@ def home():
 
 @app.route("/signup", methods=['GET'])
 def sign_up_template():
+    if session["user_id"] is not None:
+        return redirect("/")
+
     return render_template("sign-up.html")
 
 @app.route("/logout", methods=['GET'])
@@ -38,14 +41,13 @@ def logout():
 def sign_up():
     name = request.form['name']
     password_hash = request.form['password_hash']
-    print(password_hash)
 
     try:
         User(name,generate_password_hash(password_hash)).save_to_db()
     except Exception as e:
         return e.message, 500
     
-    return 'User signed in successfully', 201
+    return redirect("/")
 
 @app.route("/login", methods=['POST'])
 def login_user():
@@ -64,7 +66,6 @@ def login_user():
 
 @app.route("/<string:lesson_id>/<string:word_id>")
 @app.route("/<string:lesson_id>")
-@app.route("/lesson")
 def lesson_words(lesson_id, word_id = None):
     words = Word.find_by_lesson_id(lesson_id)
 
@@ -97,6 +98,18 @@ def lesson_words(lesson_id, word_id = None):
         next_word = words[word_index + 1]
 
     return render_template("video.html", lesson_id=lesson_id, show_video=show_video, audio_url=audio_url, word=word, next_word=next_word)
+
+@app.route("/lesson")
+def latest_lesson_position():
+    latest_position = UserActivity.find_latest_lesson_position(session['user_id'])
+    if latest_position is None:
+        return redirect("/3845127e-e6d9-4a15-b6e0-14276ace1cd8")
+    
+    return redirect("/{0}/{1}".format(latest_position[1], latest_position[0]))
+
+@app.route("/test_yourself")
+def test():
+    return render_template("test.html")
 
 @app.errorhandler(404)
 def not_found():

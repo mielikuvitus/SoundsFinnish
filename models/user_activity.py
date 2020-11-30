@@ -63,3 +63,15 @@ class UserActivity(object):
         cursor.execute('UPDATE user_activity SET "timestamp" =? WHERE word_id =? AND user_id =? ', (int(round(time.time() * 1000)), self.word_id, self.user_id,))
         sqlite.close_connection(connection)
         return
+
+    def find_latest_lesson_position(user_id):
+        #define connection and cursor
+        connection = sqlite.get_connection()
+        cursor = connection.cursor()
+
+        cursor.execute('SELECT * FROM user_activity u JOIN word w ON w.word_id = u.word_id WHERE user_id =? ORDER BY "timestamp" DESC LIMIT 1', (user_id,))
+        result = cursor.fetchone()
+        sqlite.close_connection(connection)
+        if result is not None:
+            return result[2], result[5]
+        return None
