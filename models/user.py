@@ -97,9 +97,9 @@ class User(object):
     
     @staticmethod
     def logout():
-        session['name'] = None
-        session['user_id'] = None
-        session['url'] = None
-        session['score'] = None
+        session.pop('name', None)
+        session.pop('user_id', None)
+        session.pop('url', None)
+        session.pop('score', None)
 
 
