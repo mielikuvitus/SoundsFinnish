@@ -13,7 +13,12 @@ body {
 }
 
 .error {
+    margin-block-start: unset;
+    background-color: #FF4D4D;
     color: #EBEFFF;
+    padding: 2px;
+    width: fit-content;
+    font-size: large;
 }
 
 .no-padding {
@@ -35,6 +40,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    min-width: 75px;
 }
 
 .nav i {
@@ -77,19 +83,258 @@ body {
     background-color:#4F60FF;
 }
 
-video {
-    height: 40vh;
-    outline: unset;
+/* large desktops and up ———– */
+@media screen and (min-width: 1000px) {
+
+    video {
+        height: 40vh;
+        outline: unset;
+    }
+
+    .header-subheader {
+        font-size: x-large;
+        color: #EBEFFF;
+    }
+    
+    .header-header {
+        font-size: 64px;
+        color: #EBEFFF;
+    }
+
+    .test-btn {
+        margin: 40px 0px 40px 0px;
+        font-family: 'Raleway', sans-serif;
+        background-color: #EBEFFF;
+        width: fit-content;
+        font-size: xx-large;
+        padding: 15px 50px 15px 50px;
+        border-radius: 10px;
+        border: none;
+        font-weight: 600;
+        color: #2D42FF;
+        box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.2s ease 0s;
+        cursor: pointer;
+    }
+
+    .text-translation{
+        color: #EBEFFF;
+        font-weight: 700;
+        font-size: x-large;
+    
+    }
+    
+    .text-description{
+        color: #EBEFFF;
+        font-weight: 300;
+        font-size: large;
+        max-width: 50vw;
+    }
+
+    .next-btn {
+        font-family: 'Raleway', sans-serif;
+        background-color: #EBEFFF;
+        width: fit-content;
+        height: fit-content;
+        font-size: large;
+        padding: 10px 15px 10px 15px;
+        border-radius: 10px;
+        border: none;
+        font-weight: 600;
+        box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.2s ease 0s;
+        cursor: pointer;
+    }
+
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media screen and (min-width: 550px) and (max-width: 1000px) {
+    
+    .video {
+        padding-top: 12vh;
+    }
+
+    video {
+        height: 25vh;
+        outline: unset;
+    }
+
+    .header {
+        display: inline-block;
+    }
+
+    .content {
+        flex-direction: column;
+    }
+
+    .box-description {
+        font-size: 30px;
+    }
+
+    .header-header {
+        font-size: 70px;
+        padding-right: 1em;
+        color: #EBEFFF;
+    }
+
+    .header-subheader {
+        font-size: 45px;
+        color: #EBEFFF;
+    }
+
+    .text-translation{
+        color: #EBEFFF;
+        font-weight: 700;
+        font-size: 30px;
+    }
+    
+    .text-description{
+        color: #EBEFFF;
+        font-weight: 300;
+        font-size: 25px;
+        max-width: 50vw;
+    }
+
+    .test-btn {
+        margin: 100px 0px 100px 0px;
+        padding: 25px 60px 25px 60px;
+        border-radius: 10px;
+        border: none;
+        font-weight: 600;
+        color: #2D42FF;
+        box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.2s ease 0s;
+        cursor: pointer;
+        font-family: 'Raleway', sans-serif;
+        background-color: #EBEFFF;
+        width: fit-content;
+        font-size: xx-large;
+    }
+
+    .next-btn {
+        font-family: 'Raleway', sans-serif;
+        background-color: #EBEFFF;
+        width: fit-content;
+        height: fit-content;
+        font-size: 30px;
+        padding: 20px 50px 20px 50px;
+        border-radius: 10px;
+        border: none;
+        font-weight: 600;
+        box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.2s ease 0s;
+        cursor: pointer;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    
+    .video {
+        padding-top: 12vh;
+    }
+
+    video {
+        height: 20vh;
+        outline: unset;
+    }
+
+    .header {
+        display: inline-block;
+    }
+
+    .content {
+        flex-direction: column;
+    }
+
+    .box-description {
+        font-size: 30px;
+    }
+
+    .header-header {
+        font-size: 70px;
+        padding-right: 1em;
+        color: #EBEFFF;
+    }
+
+    .header-subheader {
+        font-size: 45px;
+        color: #EBEFFF;
+    }
+
+    .text-translation{
+        color: #EBEFFF;
+        font-weight: 700;
+        font-size: 30px;
+    }
+    
+    .text-description{
+        color: #EBEFFF;
+        font-weight: 300;
+        font-size: 25px;
+        max-width: 50vw;
+    }
+
+    .test-btn {
+        margin: 100px 0px 100px 0px;
+        padding: 25px 60px 25px 60px;
+        border-radius: 10px;
+        border: none;
+        font-weight: 600;
+        color: #2D42FF;
+        box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.2s ease 0s;
+        cursor: pointer;
+        font-family: 'Raleway', sans-serif;
+        background-color: #EBEFFF;
+        width: fit-content;
+        font-size: xx-large;
+    }
+
+    .next-btn {
+        font-family: 'Raleway', sans-serif;
+        background-color: #EBEFFF;
+        width: fit-content;
+        height: fit-content;
+        font-size: 30px;
+        padding: 20px 50px 20px 50px;
+        border-radius: 10px;
+        border: none;
+        font-weight: 600;
+        box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.2s ease 0s;
+        cursor: pointer;
+    }
 }
 
 .video {
     flex: 1;
-    padding-top: 3vh;
 }
 
 .flex{
     display: flex;
     flex-direction: column;
+}
+
+#eye{
+    color:#EBEFFF;
+    font-size: 2em;
+    position: absolute;
+    padding-left: 15px;
+    cursor: pointer;
+}
+
+#eyeclosed{
+    color:#EBEFFF;
+    font-size: 2em;
+    position: absolute;
+    padding-left: 15px;
+    cursor: pointer;
+}
+
+.flex-inline{
+    display: flex;
+    flex-direction: row;
 }
 
 .header {
@@ -113,16 +358,6 @@ video {
 
 .header p {
     margin-block-start: 0;
-}
-
-.header-subheader {
-    font-size: x-large;
-    color: #EBEFFF;
-}
-
-.header-header {
-    font-size: 64px;
-    color: #EBEFFF;
 }
 
 .max {
@@ -172,20 +407,6 @@ figure {
     display: block;
 }
 
-.text-translation{
-    color: #EBEFFF;
-    font-weight: 700;
-    font-size: x-large;
-
-}
-
-.text-description{
-    color: #EBEFFF;
-    font-weight: 300;
-    font-size: large;
-    max-width: 50vw;
-}
-
 .btn-box {
     flex:0.8;
     display: flex;
@@ -200,39 +421,8 @@ figure {
     align-items: center;
 }
 
-.next-btn {
-    font-family: 'Raleway', sans-serif;
-    background-color: #EBEFFF;
-    width: fit-content;
-    height: fit-content;
-    font-size: large;
-    padding: 10px 15px 10px 15px;
-    border-radius: 10px;
-    border: none;
-    font-weight: 600;
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-    transition: all 0.2s ease 0s;
-    cursor: pointer;
-}
-
 .next-btn a {
     color: #2D42FF;
-}
-
-.test-btn {
-    margin: 40px 0px 40px 0px;
-    font-family: 'Raleway', sans-serif;
-    background-color: #EBEFFF;
-    width: fit-content;
-    font-size: xx-large;
-    padding: 15px 50px 15px 50px;
-    border-radius: 10px;
-    border: none;
-    font-weight: 600;
-    color: #2D42FF;
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-    transition: all 0.2s ease 0s;
-    cursor: pointer;
 }
 
 .test-btn:hover {
@@ -262,6 +452,7 @@ figure {
     display: flex;
     align-items: center;
     color: #EBEFFF;
+    max-width: 500px;
 }
 
 .box-content i {

@@ -39,6 +39,7 @@ class User(object):
                 cursor.execute('INSERT INTO user (user_id, name, password_hash) VALUES (?, ?, ?)', (self.user_id, self.name, self.password_hash))
                 session['name'] = self.name
                 session['user_id'] = self.user_id
+                session['url'] = 0
             except:
                 # cursor.execute('CREATE TABLE user (user_id text PRIMARY KEY, name text, password_hash text)')
                 raise UserNotFoundError('The table `user` does not exist')

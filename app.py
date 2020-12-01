@@ -5,6 +5,7 @@ from models.user_activity import UserActivity
 from models.lesson import Lesson
 from models.word import Word
 from models.audio import Audio
+from models.video import Video
 from models.test_yourself import TestYourself
 import sqlite3
 import random
@@ -94,11 +95,14 @@ def lesson_words(lesson_id, word_id = None):
     audio = Audio.find_by_word(word.word_id)
     audio_url = audio[0].content_url
 
+    video = Video.find_by_word(word.word_id)
+    video_url = video[0].content_url
+
     next_word = None
     if word_index < len(words) - 1:
         next_word = words[word_index + 1]
 
-    return render_template("video.html", lesson_id=lesson_id, show_video=show_video, audio_url=audio_url, word=word, next_word=next_word)
+    return render_template("video.html", lesson_id=lesson_id, show_video=show_video, audio_url=audio_url, video_url=video_url, word=word, next_word=next_word)
 
 @app.route("/lesson")
 def latest_lesson_position():

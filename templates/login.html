@@ -15,7 +15,13 @@
             </div>
             <div class="form-field">
                 <label for="password" class="form-label">password</label>
-                <input type="password" name="password_hash" id="password" class="form-input" placeholder="themostsecurepw9000" required minlength="8">
+                <div class= "flex-inline">
+                    <input type="password" name="password_hash" id="password" class="form-input" placeholder="themostsecurepw9000" required minlength="8">
+                    <div class= "flex">
+                        <i class="material-icons" id="eye" style="visibility: visible" onclick="toggle_visibility()">visibility</i>
+                        <i class="material-icons" id="eyeclosed" style="visibility: hidden"onclick="toggle_visibility()">visibility_off</i>
+                    </div>
+                </div>
             </div>
             {% if error %}
                 <p class=error><strong>Error:</strong> {{ error }} </p>

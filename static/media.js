@@ -25,5 +25,5 @@ function handlePlayButton() {
 }
 
 function handleAudioEnd() {
-    playButton.classList.remove("playing");
+  playButton.classList.remove("playing");
 }

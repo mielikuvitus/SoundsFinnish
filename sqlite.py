@@ -122,7 +122,7 @@ def setup():
         dict(name="Nähään!", description="Literal translation: We will see", translation="See you!"),
         dict(name="Häh?", description="Used when you did not hear what your friend said to you", translation="What?"),
         dict(name="Mitäs sä?", description="Literal translation: What you?", translation="How are you?"),
-        dict(name="Mitäs tässä?", description="Literal translation: What here? This is basically the way to answer the question How are you? without actually giving a proper answer back.", translation="Not bad or Alright"),
+        dict(name="Mitäs tässä.", description="Literal translation: What here? This is basically the way to answer the question How are you? without actually giving a proper answer back.", translation="Not bad or Alright"),
         dict(name="Mitäs ite?", description="Literal translation: What yourself?", translation="And you?"),
         dict(name="Kiitos", description="Finnish people give thanks when it is deserved and never only for the sake of saying it.", translation="Thank you"),
         dict(name="Sori", description="Finnish people would use this if they accidentally bumb into you. This is not used for apologising after a serious mess up.", translation="Sorry"),
@@ -227,20 +227,64 @@ def setup():
         cursor.execute("INSERT INTO audio VALUES (?,?,?)", (str(uuid.uuid4()), audio["word_id"], audio["content_url"],))
     """
 
-    #add video data
+    #add video data for lesson 1
 
-    video_id = str(uuid.uuid4())
-    cursor.execute("INSERT INTO video VALUES (?, '1a127cf9-354a-4262-8183-8c52f4d1dcac', '/static/video/moi-nelly-1.m4v')", (video_id,))
+    """ video_id = str(uuid.uuid4())
+    cursor.execute("INSERT INTO video VALUES (?, '1a127cf9-354a-4262-8183-8c52f4d1dcac', '/static/video/moi-nelly-1.m4v')", (video_id,)) """
 
-    """    video_files = [
-        dict(word_id='1a127cf9-354a-4262-8183-8c52f4d1dcac', content_url='/static/video/moi-nelly.mov')
-
+    """     video_files = [
+        # dict(word_id='1a127cf9-354a-4262-8183-8c52f4d1dcac', content_url='/static/video/moi-nelly.mov'),
+        dict(word_id='323c03b5-8255-4c69-b9d1-074b5c629362', content_url='/static/video/moimoi-sara.mp4'),
+        dict(word_id='c6b0cf3d-4a06-415b-b558-de4a88643d96', content_url='/static/video/lähetää-henkka.mp4'),
+        dict(word_id='33bfba8b-d9c6-4b8b-8e9e-0aa811f14c28', content_url='/static/video/nähään-nelly.m4v'),
+        dict(word_id='c26a4365-c03c-4e63-92d9-2edc82cc3554', content_url='/static/video/häh-sara.mp4'),
+        dict(word_id='594e51ea-a36a-4248-a087-95c3beec2abc', content_url='/static/video/mitässä-nelly.m4v'),
+        dict(word_id='cbf8ef17-54dd-48e1-a7ea-1c2444551973', content_url='/static/video/mitästässä-sara.mp4'),
+        dict(word_id='d25af6fc-925d-439a-9c46-d13511b31b61', content_url='/static/video/mitäsite-henkka.mp4'),
+        dict(word_id='63f7535e-4656-4624-b3f3-5035fc996055', content_url='/static/video/kiitos-henkka.mp4'),
+        dict(word_id='a7781d82-805e-4b86-9ba8-bcd82c1af49a', content_url='/static/video/sori-sara.mp4'),
+        dict(word_id='6d554275-2ba5-4909-baf7-954fe1176275', content_url='/static/video/joo-nelly.m4v'),
+        dict(word_id='8db24552-025b-4d11-8b0c-8f0df6988db8', content_url='/static/video/ei-henkka.mp4'),
+        dict(word_id='75cdeddc-b279-45d6-b4d4-831173edb416', content_url='/static/video/eimitää-nelly.m4v'),
+        dict(word_id='2207b170-ad80-47d0-a9ad-27f5bc80082f', content_url='/static/video/okei-sara.mp4'),
+        dict(word_id='bf77a9b7-bb9d-4203-b1b1-7217b2aec00b', content_url='/static/video/selvä-henkka.mp4'),
+        dict(word_id='dd15748e-da29-42b9-a221-fb6add230ab7', content_url='/static/video/jee-nelly.m4v'),
+        dict(word_id='0e14acf7-39a8-4cee-b03b-fd804f1dc25f', content_url='/static/video/oota-sara.mp4'),
+        dict(word_id='7d986d3c-bc33-4a7f-8004-9296a1dac196', content_url='/static/video/apua-henkka.mp4'),
+        dict(word_id='f8706ba2-e3bb-4583-b2ac-d92d93e541ef', content_url='/static/video/kippis-sara.mp4')
 
     ]
     for video in video_files:
-        cursor.execute("INSERT INTO video VALUES (?,?,?)", (str(uuid.uuid4()), video["word_id"], video["content_url"],))
-
+        cursor.execute("INSERT INTO video VALUES (?,?,?)", (str(uuid.uuid4()), video["word_id"], video["content_url"],)) 
     """
+
+    #add video data for lesson 2
+
+    """     video_files = [
+        dict(word_id='139982c8-6d5e-432a-bc43-6172ae8662f3', content_url='/static/video/mikäsunnimion-alarik.mp4'),
+        dict(word_id='ca22da25-4fb1-48a8-a2c0-72b792d2ad2a', content_url='/static/video/mäoon-alarik.mp4'),
+        dict(word_id='f59eef12-89ff-464f-8b8a-54b903c55740', content_url='/static/video/puhuksäenglantii-iina.m4v'),
+        dict(word_id='d0ca5c6b-3e9f-4e1c-bd5e-65ae1e0d33a8', content_url='/static/video/miks-alarik.mp4'),
+        dict(word_id='cda227a5-aaca-4716-888e-f367a87787b5', content_url='/static/video/emmätiiä-iina.m4v'),
+        dict(word_id='d3ee8f93-7a1c-4b7e-badd-ee74d063b44d', content_url='/static/video/emmäusko-iina.m4v'),
+        dict(word_id='b64eb9b3-d50c-44dc-bbc6-d42852035294', content_url='/static/video/hienoo-alarik.mp4'),
+        dict(word_id='95fa103c-68fe-4623-8682-15c4a872b8ce', content_url='/static/video/onnee-iina.m4v'),
+        dict(word_id='37482b31-ed8c-4ee6-be6c-ec48ad4a35c5', content_url='/static/video/mitätäätarkottaa-alarik.mp4'),
+        dict(word_id='b7e6306e-670c-43ba-bb1f-7957ca389b35', content_url='/static/video/onksteilwifii-iina.m4v'),
+        dict(word_id='b0d0115b-1eeb-4092-99b5-4dbf5b93cc8d', content_url='/static/video/misteilonvessa-alarik.mp4'),
+        dict(word_id='9e225f87-e0bd-4381-8b3c-cf8e7717597b', content_url='/static/video/puhunvaanvähänsuomee-alarik.mp4'),
+        dict(word_id='f05d1ab0-25d7-4b66-9d4a-0c0f0a3d1b7e', content_url='/static/video/entajuumitään-iina.m4v'),
+        dict(word_id='6d1dd8b0-8ea7-40b2-a137-9fbd82d33513', content_url='/static/video/voiksäpuhuuhitaammin-iina.m4v'),
+        dict(word_id='5a50ae2c-4610-4677-9f68-3f9847149e2f', content_url='/static/video/voikkojättäämutrauhaan-alarik.mp4'),
+        dict(word_id='3b0c7b7c-1e69-46e3-9aa7-2776c3f070f3', content_url='/static/video/ykskahvikiitos-alarik.mp4'),
+        dict(word_id='b1dbdd53-dc2c-47ad-bfcc-62f9b8e27e63', content_url='/static/video/yksolutkiitos-alarik.mp4'),
+        dict(word_id='78b6883d-0052-40ee-882c-4d1b0ad80403', content_url='/static/video/mäsäse-iina.m4v'),
+        dict(word_id='86592ec8-8816-49a7-a43b-c72e1597f82b', content_url='/static/video/metene-iina.m4v')
+        
+    ]
+    for video in video_files:
+        cursor.execute("INSERT INTO video VALUES (?,?,?)", (str(uuid.uuid4()), video["word_id"], video["content_url"],)) """
+
     connection.commit()
 
     connection.close()
