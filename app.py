@@ -34,7 +34,7 @@ def home():
 
 @app.route("/signup", methods=['GET'])
 def sign_up_template():
-    if 'user_id' in session:
+    if 'user_id' not in session:
         return redirect("/")
 
     return render_template("sign-up.html")
