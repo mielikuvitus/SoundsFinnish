@@ -21,7 +21,7 @@ def login():
     lesson1 = Lesson.get_by_lesson_id('3845127e-e6d9-4a15-b6e0-14276ace1cd8')
     lesson2 = Lesson.get_by_lesson_id('618af7ad-3d63-4609-a7f1-50704106b9e4')
 
-    if 'name' not in session:
+    if 'name' in session:
         return render_template("home.html", name = session['name'], lesson1 = lesson1, lesson2 = lesson2)
     else:
         return render_template("login.html")
