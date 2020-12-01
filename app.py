@@ -9,9 +9,11 @@ from models.video import Video
 from models.test_yourself import TestYourself
 import sqlite3
 import random
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 app = Flask(__name__)
 app.secret_key = 'suv'
+app.wsgi_app = ProxyFix(app.wsgi_app)
 
 @app.route("/")
 def login():
@@ -72,9 +74,12 @@ def lesson_words(lesson_id, word_id = None):
     words = Word.find_by_lesson_id(lesson_id)
 
     if word_id is None:
-        word_id = UserActivity.get_latest_word_id(session['user_id'])
-        if word_id == words[-1].word_id:
+        if session.get('user_id') is None:
             word_id = words[0]
+        else:
+            word_id = UserActivity.get_latest_word_id(session['user_id'])
+            if word_id == words[-1].word_id:
+                word_id = words[0]
 
     word_index = 0
     for i, word in enumerate(words):
