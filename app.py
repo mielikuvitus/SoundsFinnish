@@ -42,7 +42,7 @@ def sign_up_template():
 @app.route("/logout", methods=['GET'])
 def logout():
     if 'user_id' not in session:
-        return redirect("/")
+        return render_template("login.html")
 
     User.logout()
     return redirect("/")
