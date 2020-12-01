@@ -1,1 +1,1 @@
-web: uwsgi uwsgi.ini
+web: python setup.py; gunicorn wsgi:app

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, redirect, url_for
+from flask import Flask, render_template, request, session, redirect, url_for, send_from_directory, make_response
 from werkzeug.security import generate_password_hash, check_password_hash
 from models.user import User
 from models.user_activity import UserActivity
@@ -9,6 +9,7 @@ from models.video import Video
 from models.test_yourself import TestYourself
 import sqlite3
 import random
+import os
 from werkzeug.middleware.proxy_fix import ProxyFix
 
 app = Flask(__name__)
@@ -20,24 +21,29 @@ def login():
     lesson1 = Lesson.get_by_lesson_id('3845127e-e6d9-4a15-b6e0-14276ace1cd8')
     lesson2 = Lesson.get_by_lesson_id('618af7ad-3d63-4609-a7f1-50704106b9e4')
 
-    if session['name'] is not None:
+    if 'name' in session:
         return render_template("home.html", name = session['name'], lesson1 = lesson1, lesson2 = lesson2)
     else:
         return render_template("login.html")
 
 @app.route("/home")
 def home():
+    if 'user_id' not in session:
+        return redirect("/")
     return render_template("home.html")
 
 @app.route("/signup", methods=['GET'])
 def sign_up_template():
-    if session["user_id"] is not None:
+    if 'user_id' in session:
         return redirect("/")
 
     return render_template("sign-up.html")
 
 @app.route("/logout", methods=['GET'])
 def logout():
+    if 'user_id' not in session:
+        return redirect("/")
+
     User.logout()
     return redirect("/")
 
@@ -74,12 +80,9 @@ def lesson_words(lesson_id, word_id = None):
     words = Word.find_by_lesson_id(lesson_id)
 
     if word_id is None:
-        if session.get('user_id') is None:
+        word_id = UserActivity.get_latest_word_id(session['user_id'])
+        if word_id == words[-1].word_id:
             word_id = words[0]
-        else:
-            word_id = UserActivity.get_latest_word_id(session['user_id'])
-            if word_id == words[-1].word_id:
-                word_id = words[0]
 
     word_index = 0
     for i, word in enumerate(words):
@@ -111,6 +114,9 @@ def lesson_words(lesson_id, word_id = None):
 
 @app.route("/lesson")
 def latest_lesson_position():
+    if 'user_id' not in session:
+        return redirect("/")
+
     latest_position = UserActivity.find_latest_lesson_position(session['user_id'])
     if latest_position is None:
         return redirect("/3845127e-e6d9-4a15-b6e0-14276ace1cd8")
@@ -120,7 +126,9 @@ def latest_lesson_position():
 @app.route("/test_yourself")
 @app.route("/test_yourself/<int:page>")
 def test(word_id = None, page = 1):
-    
+    if 'user_id' not in session:
+        return redirect("/")
+
     total = 11
 
     if session['url'] >= total:
@@ -159,6 +167,9 @@ def test(word_id = None, page = 1):
 
 @app.route('/submit_answer', methods=["POST"])
 def submit_answer():
+    if 'user_id' not in session:
+        return redirect("/")
+
     session["correct_answers"] = request.json["result"]
     if session['url'] <= 11:
         session['url'] = session['url'] + 1
@@ -168,6 +179,9 @@ def submit_answer():
 
 @app.route("/result")
 def result():
+    if 'user_id' not in session:
+        return redirect("/")
+
     message = TestYourself.get_final_score_message(session["correct_answers"])
     return render_template("result.html", message=message)
 
@@ -176,9 +190,10 @@ def show_message():
     return render_template("message.html")
 
 @app.errorhandler(404)
-def not_found():
+def not_found(request):
     """Page not found."""
     return make_response(render_template("404.html"), 404)
- 
 
-
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'), 'favicon.ico', mimetype='image/vnd.microsoft.icon')
