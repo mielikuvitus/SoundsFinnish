@@ -449,6 +449,8 @@ body {
         display: flex;
         flex-direction: column;
         background-color:#4F60FF;
+        max-width: 100%;
+        overflow-x: hidden
     }
 
     .form-input {
@@ -467,7 +469,7 @@ body {
 
     video {
         width: 90vw;
-        padding-left: 12vw;
+        padding-left: 14vw;
         outline: unset;
     }
 
