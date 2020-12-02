@@ -427,6 +427,7 @@ body {
         justify-content: center;
         min-width: 50px;
         position: fixed;
+        z-index: 500;
     }
 
     .nav i {
@@ -469,7 +470,7 @@ body {
 
     video {
         width: 90vw;
-        padding-left: 14vw;
+        padding-left: 12vw;
         outline: unset;
     }
 
