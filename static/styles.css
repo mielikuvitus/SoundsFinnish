@@ -5,6 +5,7 @@ html {
 body {
     margin: 0;
     display: flex;
+    background-color:#4F60FF;
 }
 
 #zilla {
@@ -411,6 +412,7 @@ body {
         align-items: center;
         justify-content: center;
         min-width: 50px;
+        position: fixed;
     }
 
     .nav i {
@@ -428,7 +430,7 @@ body {
     }
 
     .container {
-        width: 90vw;
+        width: 100vw;
         display: flex;
         flex-direction: column;
         background-color:#4F60FF;
@@ -454,7 +456,7 @@ body {
     }
 
     .header {
-        padding-left: 6vw;
+        padding-left: 18vw;
         padding-top: 3vh;
         flex:1;
         display: flex;
@@ -562,6 +564,7 @@ body {
     .box-description {
         font-size: 18px;
         color: #EBEFFF;
+        max-width: 250px;
     }
 
     p {
