@@ -162,6 +162,13 @@ body {
         width: 50vw;
     }
 
+    .btn-box {
+        flex:0.8;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
     .next-btn {
         font-family: 'Raleway', sans-serif;
         background-color: #EBEFFF;
@@ -338,6 +345,13 @@ body {
         width: 50vw;
     }
 
+    .btn-box {
+        flex:0.8;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
     .next-btn {
         font-family: 'Raleway', sans-serif;
         background-color: #EBEFFF;
@@ -431,6 +445,7 @@ body {
 
     .container {
         width: 100vw;
+        height: 100vh;
         display: flex;
         flex-direction: column;
         background-color:#4F60FF;
@@ -452,6 +467,7 @@ body {
 
     video {
         width: 90vw;
+        padding-left: 12vw;
         outline: unset;
     }
 
@@ -519,6 +535,14 @@ body {
         background-color: #EBEFFF;
         width: fit-content;
         font-size: 20px;
+    }
+
+    .btn-box {
+        flex:0.8;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        padding-top: 2em;
     }
 
     .next-btn {
@@ -663,13 +687,6 @@ body {
 
 .text{
     display: block;
-}
-
-.btn-box {
-    flex:0.8;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
 }
 
 .next-btn a {
