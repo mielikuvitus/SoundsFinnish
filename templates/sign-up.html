@@ -1,22 +1,22 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div class="header flex-end">
+<div class="header-{{status}} flex-end">
     <p class="header-header no-padding" id="zilla">welcome</p>
     <p class="header-subheader extra-padding">create an account</p>
 </div>
 
-<div class="content">
+<div class="form-box">
     <div class="box">
         <form action="/signup" method="post">
             <div class="form-field">
                 <label for="username" class="form-label">username</label>
-                <input type="text" name="name" id="username" class="form-input" placeholder="theunknownverbalist" required>
+                <input type="text" name="name" id="username" class="form-input" required>
             </div>
             <div class="form-field">
                 <label for="password" class="form-label">password</label>
                 <div class= "flex-inline">
-                    <input type="password" name="password_hash" id="password" class="form-input" placeholder="themostsecurepw9000" required minlength="8">
+                    <input type="password" name="password_hash" id="password" class="form-input" required minlength="8">
                     <div class= "flex">
                         <i class="material-icons" id="eye" style="visibility: visible" onclick="toggle_visibility()">visibility</i>
                         <i class="material-icons" id="eyeclosed" style="visibility: hidden"onclick="toggle_visibility()">visibility_off</i>
@@ -24,7 +24,7 @@
                 </div>
             </div>
             <div class="form-field">
-                <input type="submit" class="form-submit" value="sign up">
+                <input type="submit" class="form-btn" value="sign up">
             </div>
             <div class="register">
                 <label for="register" class="register-label">Already a member?</label>

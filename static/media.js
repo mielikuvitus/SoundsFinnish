@@ -2,15 +2,22 @@ let audioElem = document.getElementById("audio");
 let playButton = document.getElementById("playbutton");
 
 console.log(playButton);
-playButton.addEventListener("click", handlePlayButton, false);
-audioElem.addEventListener("ended", handleAudioEnd, false);
-playAudio();
+if (playButton != null) {
+  playButton.addEventListener("click", handlePlayButton, false);
+}
+if (audioElem != null) {
+  audioElem.addEventListener("ended", handleAudioEnd, false);
+}
+if (playButton != null && audioElem != null) {
+  playAudio();
+}
+
 
 async function playAudio() {
   try {
     playButton.classList.add("playing");
     await audioElem.play();
-  } catch(err) {
+  } catch (err) {
     playButton.classList.remove("playing");
   }
 }

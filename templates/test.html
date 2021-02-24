@@ -1,67 +1,75 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="header centre">
-    <p class="header-subheader no-padding">Choose the word you are hearing</p>
-    <figure class= "no-padding-left">
-        <button id="playbutton">
-            <i class="material-icons" id="size-up-up">volume_up</i>
-        </button>
-        <audio id="audio"
-            src="{{audio_url}}">
-                Your browser does not support the
-                <code>audio</code> element.
-        </audio>
-    </figure>
-</div>
-
-<script>
-    {% if page == 1 %}
-        window.addEventListener("load", function(){
-            sessionStorage.setItem("correctAnswers", "0")
-        });
-    {% endif %}
-
-    function markCorrectAnswer() {
-        var currentNumber = parseInt(sessionStorage.getItem("correctAnswers"));
-        sessionStorage.setItem("correctAnswers", (currentNumber + 1).toString());
-
-        fetch("/submit_answer", {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({result: currentNumber + 1})
-        }).then(res => {
-            window.location = res.url;
-        });
-    }
-
-    function nextPage() {
-        var currentNumber = parseInt(sessionStorage.getItem("correctAnswers"));
-
-        fetch("/submit_answer", {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({result: currentNumber + 1})
-        }).then(res => {
-            window.location = res.url;
-        });
-    }
-
-    
-</script>
-
-<div class="flex">
-    <div class="test-btn-box">
-        {% for item in test_choices %}
-            <div id="test-btn" class="test-btn" onclick="{% if item == test_answer %}markCorrectAnswer(){% else %}nextPage(){% endif %}">{{item}}</div>
-        {% endfor %}
+<div class="main">
+    <div class="shadow-box">
+        <p>hidden</p>
     </div>
-</div>
-<div class="btn-box padding-right">
-    <p></p>
+    <div class="header-{{status}}">
+        <p class="header-subheader no-padding">Choose the word you are hearing</p>
+        <figure class= "no-padding-left">
+            <button id="playbutton">
+                <i class="material-icons" id="size-up-up">volume_up</i>
+            </button>
+            <audio id="audio"
+                src="{{audio_url}}">
+                    Your browser does not support the
+                    <code>audio</code> element.
+            </audio>
+        </figure>
+    </div>
+
+    <script>
+        {% if page == 1 %}
+            window.addEventListener("load", function(){
+                sessionStorage.setItem("correctAnswers", "0")
+            });
+        {% endif %}
+
+        function markCorrectAnswer() {
+            var currentNumber = parseInt(sessionStorage.getItem("correctAnswers"));
+            sessionStorage.setItem("correctAnswers", (currentNumber + 1).toString());
+
+            fetch("/submit_answer", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({result: currentNumber + 1})
+            }).then(res => {
+                window.location = res.url;
+            });
+        }
+
+        function nextPage() {
+            var currentNumber = parseInt(sessionStorage.getItem("correctAnswers"));
+
+            fetch("/submit_answer", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({result: currentNumber + 1})
+            }).then(res => {
+                window.location = res.url;
+            });
+        }
+
+        
+    </script>
+
+    <div class="flex">
+        <div class="test-btn-box">
+            {% for item in test_choices %}
+                <div id="test-btn" class="test-btn" onclick="{% if item == test_answer %}markCorrectAnswer(){% else %}nextPage(){% endif %}">{{item}}</div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="btn-box padding-right">
+        <p></p>
+    </div>
+    <div class="footer-mobile">
+        <img src="../static/img/helsinki.png" alt="Helsinki cathedral"> 
+    </div>
 </div>
 
 {% endblock %}

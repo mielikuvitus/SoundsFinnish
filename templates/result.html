@@ -1,15 +1,23 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="header flex-end">
-    <p class="header-subheader no-padding">Your results are:</p>
-    <p class="header-header extra-padding" id="zilla">{{message}}</p>
-</div>
-<div class="btn-box-test padding-right">
-    <div id="next-btn" class="next-btn">
-        <a href="/test_yourself">Try again!</a>
+<div class="main">
+    <div class="shadow-box">
+        <p>hidden</p>
     </div>
-    <div id="next-btn" class="next-btn">
-        <a href="/">Back to home</a>
+    <div class="header-{{status}}-lesson ">
+        <p class="header-subheader no-padding">Your results are:</p>
+        <p class="header-header extra-padding" id="zilla">{{message}}</p>
+    </div>
+    <div class="btn-box-test">
+        <div id="next-btn-mobile" class="next-btn">
+            <a href="/test_yourself">Try again!</a>
+        </div>
+        <div id="next-btn-mobile" class="next-btn">
+            <a href="/">Back to home</a>
+        </div>
+    </div>
+    <div class="footer">
+        <img src="../static/img/helsinki.png" alt="Helsinki cathedral"> 
     </div>
 </div>
 {% endblock %}

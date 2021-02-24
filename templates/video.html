@@ -1,6 +1,9 @@
 {% extends "lesson.html" %}
 {% block video %}
     {% if show_video %}
+    <div class="shadow-box">
+        <p>hidden</p>
+    </div>
     <div class="video">
         <video controls poster="">
             <source src="{{video_url}}">
@@ -11,6 +14,9 @@
     </div>
         {{ super() }}
     {% else %}
+        <div class="shadow-box">
+            <p>hidden</p>
+        </div>
         {{ super() }}
     {% endif %}
 {% endblock %}

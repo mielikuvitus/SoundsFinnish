@@ -4,41 +4,51 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0, user-scalable=no">
         <link rel="stylesheet" href="/static/styles.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Round">
         <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
         <link rel="shortcut icon" href="{{ url_for('static', filename='icon-16.ico') }}">
         <title>Sounds Finnish</title>
     </head>
-    <body>
-        <div class= "nav">
-            <div class="nav-account">
-                <a href="/logout">
-                    <i class="material-icons" id="tab">power_settings_new</i>
-                </a>
+    <body class = "bg-{{status}}">
+        <div class= "nav-{{status}}">
+            <div class="nav-home-toggle">
+                <i class="material-icons-round" id="tab-menu" style="visibility: visible" onclick="toggle_menu_visibility()">menu</i>
+                <i class="material-icons-round" id="tab-close" style="visibility: hidden" onclick="toggle_menu_visibility()">close</i>
             </div>
-            <div class="nav-tab">
-                <a href="/">
-                    <i class="material-icons">home</i>
-                </a>
+            <div class="nav-box">
+                <div class="nav-tab" style="visibility: hidden">
+                    <a href="/">
+                        <i class="material-icons-round">home</i>
+                    </a>
+                    <p>home</p>
+                </div>
+                <div class="nav-tab" style="visibility: hidden">
+                    <a id="practise" href="/lesson">
+                        <i class="material-icons-round">fitness_center</i>
+                    </a>
+                    <p>practise</p>
+                </div>
+                <div class="nav-tab" style="visibility: hidden">
+                    <a id="test" href="/test_yourself">
+                        <i class="material-icons-round">school</i>
+                    </a>
+                    <p>test</p>
+                </div>
+                <div class="nav-tab" style="visibility: hidden">
+                    <a id="logout" href="/logout">
+                        <i class="material-icons-round">power_settings_new</i>
+                    </a>
+                    <p>logout</p>
+                </div>
             </div>
-            <div class="nav-tab">
-                <a href="/lesson">
-                    <i class="material-icons">fitness_center</i>
-                </a>
-            </div>
-            <div class="nav-tab">
-                <a href="/test_yourself">
-                    <i class="material-icons">school</i>
-                </a>
-            </div> 
-            <div class="shadow-box"></div> 
         </div>
         <div class="container">
             {% block content %}
 
             {% endblock %}
             <script type="text/javascript" src="/static/media.js"></script>
+            <script type="text/javascript" src="/static/gestures.js"></script>
             <script type="text/javascript" src="/static/styles.js"></script>
         </div>
     </body>

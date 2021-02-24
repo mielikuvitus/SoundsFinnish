@@ -1,32 +1,42 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="header flex-end">
-    <p class="header-subheader no-padding">Hello {{ name }}, welcome to the spoken Finnish course</p>
-    <p class="header-header extra-padding" id="zilla">suomen puhekielen kurssi</p>
+<div class="shadow-box">
+    <p>hidden</p>
 </div>
-
-<div class="content">
-    <div class="box">
-        <div class="box-content">
-            <a href="/3845127e-e6d9-4a15-b6e0-14276ace1cd8">
-                <i class="material-icons">play_circle_outline</i>
-                <div class="box-content-inner">
-                    <p class="box-header" name="name" id="zilla">Lesson 1 - {{lesson1.name}}</p>
-                    <p class="box-description" name="description">{{lesson1.description}}</p>
-                </div>
-            </a>  
-        </div>
+<div class="main">
+    <div class="header-{{status}}">
+        <p class="header-subheader no-padding">Hello {{ name }}, welcome to the spoken Finnish course</p>
+        <p class="header-header" id="zilla">suomen puhekielen kurssi</p>
     </div>
-    <div class="box">
-        <div class="box-content">
-            <a href="/618af7ad-3d63-4609-a7f1-50704106b9e4">
-                <i class="material-icons">play_circle_outline</i>
-                <div class="box-content-inner">
-                    <p class="box-header" name="name" id="zilla">Lesson 2 - {{lesson2.name}}</p>
-                    <p class="box-description" name="description">{{lesson2.description}}</p>
-                </div>
-            </a> 
-        </div>
+
+    <div id="hsb" class="horizontal-scroll-box" onscroll="calc_scroll_position()">
+        <ul id="hsb-box" class="box">
+            <li class="box-content" id="first">
+                <a href="/3845127e-e6d9-4a15-b6e0-14276ace1cd8">
+                    <i id="play" class="material-icons-round">play_circle_filled</i>
+                    <div class="box-content-inner">
+                        <p class="box-header" name="name" id="zilla">{{lesson1.name}}</p>
+                        <p class="box-description" name="description">{{lesson1.description}}</p>
+                    </div>
+                </a>  
+            </li>
+            <li class="box-content" id="second">
+                <a href="/618af7ad-3d63-4609-a7f1-50704106b9e4">
+                    <i id="play" class="material-icons-round">play_circle_filled</i>
+                    <div class="box-content-inner">
+                        <p class="box-header" name="name" id="zilla">{{lesson2.name}}</p>
+                        <p class="box-description" name="description">{{lesson2.description}}</p>
+                    </div>
+                </a> 
+            </li>
+        </ul>  
+    </div>
+    <ul class="box-dots">
+        <li class="dots" id="first_dot" onclick="scroll_to_first()"></li>
+        <li class="dots" id="second_dot" onclick="scroll_to_second()"></li>
+    </ul>
+    <div class="footer">
+        <img src="../static/img/helsinki.png" alt="Helsinki cathedral"> 
     </div>
 </div>
 {% endblock %}

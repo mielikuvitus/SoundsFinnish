@@ -15,6 +15,20 @@ from werkzeug.middleware.proxy_fix import ProxyFix
 app = Flask(__name__)
 app.secret_key = 'suv'
 app.wsgi_app = ProxyFix(app.wsgi_app)
+app.config["TEMPLATES_AUTO_RELOAD"] = True
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
+
+@app.after_request
+def add_header(r):
+    """
+    Add headers to both force latest IE rendering engine or Chrome Frame,
+    and also to cache the rendered page for 10 minutes.
+    """
+    r.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    r.headers["Pragma"] = "no-cache"
+    r.headers["Expires"] = "0"
+    r.headers['Cache-Control'] = 'public, max-age=0'
+    return r
 
 @app.route("/")
 def login():
@@ -22,27 +36,27 @@ def login():
     lesson2 = Lesson.get_by_lesson_id('618af7ad-3d63-4609-a7f1-50704106b9e4')
 
     if 'name' in session:
-        return render_template("home.html", name = session['name'], lesson1 = lesson1, lesson2 = lesson2)
+        return render_template("home.html", name = session['name'], lesson1 = lesson1, lesson2 = lesson2, status="home")
     else:
-        return render_template("login.html")
+        return render_template("login.html", status="login")
 
 @app.route("/home")
 def home():
     if 'user_id' not in session:
         return redirect("/")
-    return render_template("home.html")
+    return render_template("home.html", status="home")
 
 @app.route("/signup", methods=['GET'])
 def sign_up_template():
     if 'user_id' in session:
         return redirect("/")
 
-    return render_template("sign-up.html")
+    return render_template("sign-up.html", status="sign-up")
 
 @app.route("/logout", methods=['GET'])
 def logout():
     if 'user_id' not in session:
-        return render_template("login.html")
+        return render_template("login.html", status="login")
 
     User.logout()
     return redirect("/")
@@ -68,11 +82,11 @@ def login_user():
     lesson2 = Lesson.get_by_lesson_id('618af7ad-3d63-4609-a7f1-50704106b9e4')
 
     if User.login_valid(name, password):
-        return render_template('home.html', name = session['name'], lesson1 = lesson1, lesson2 = lesson2)
+        return render_template('home.html', name = session['name'], lesson1 = lesson1, lesson2 = lesson2, status="home")
     else:
         error = 'Invalid credentials'
         session['name'] = None
-        return render_template('login.html', error = error)
+        return render_template('login.html', error = error, status="login")
 
 @app.route("/<string:lesson_id>/<string:word_id>")
 @app.route("/<string:lesson_id>")
@@ -110,7 +124,11 @@ def lesson_words(lesson_id, word_id = None):
     if word_index < len(words) - 1:
         next_word = words[word_index + 1]
 
-    return render_template("video.html", lesson_id=lesson_id, show_video=show_video, audio_url=audio_url, video_url=video_url, word=word, next_word=next_word)
+    previous_word = None
+    if word_index != 0:
+        previous_word = words[word_index - 1]
+
+    return render_template("video.html", lesson_id=lesson_id, show_video=show_video, audio_url=audio_url, video_url=video_url, word=word, next_word=next_word, previous_word = previous_word, status="home")
 
 @app.route("/lesson")
 def latest_lesson_position():
@@ -163,7 +181,7 @@ def test(word_id = None, page = 1):
     test_choices.append(word_list[test_choice2].name)
     random.shuffle(test_choices)
 
-    return render_template("test.html", page=page, url=session['url'], next_word=page < total, test_answer=test_answer, test_choices=test_choices, total=total, audio_url=audio_url)
+    return render_template("test.html", page=page, url=session['url'], next_word=page < total, test_answer=test_answer, test_choices=test_choices, total=total, audio_url=audio_url, status="home")
 
 @app.route('/submit_answer', methods=["POST"])
 def submit_answer():
@@ -183,11 +201,11 @@ def result():
         return redirect("/")
 
     message = TestYourself.get_final_score_message(session["correct_answers"])
-    return render_template("result.html", message=message)
+    return render_template("result.html", message=message, status="home")
 
 @app.route("/message")
 def show_message():
-    return render_template("message.html")
+    return render_template("message.html", status="home")
 
 @app.errorhandler(404)
 def not_found(request):
